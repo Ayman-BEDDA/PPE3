@@ -1,0 +1,19 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+
+accueil:
+    path: /
+    controller: App\Controller\AccueilController::index
+visiteur:
+    path: /visiteur
+    controller: App\Controller\VisiteurController::index    
+consulter:
+    path: /affichage/consulter/{mois}/{annee}
+    controller: App\Controller\ConsulterController::index
+connexion: 
+    path: /connexion
+    controller: App\Controller\ConnexionController::index
+affichage:
+    path: /affichage
+    controller: App\Controller\AffichageController::index
