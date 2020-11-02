@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use \PDO;
 
 
-class ConnexionController extends AbstractController{
+class CocomptableController extends AbstractController{
 
     
    public function index(Request $request)
@@ -31,7 +31,8 @@ class ConnexionController extends AbstractController{
         
         if ( $form->isSubmitted() && $form->isValid() ) {
             $data = $form->getData() ;
-           
+            $session=$request->getSession();
+            $session=set('identifiant','a131');
                 array( 'data' => $data ) ;
                 
                 $pdo = new \PDO('mysql:host=localhost; dbname=GSB_FRAIS', 'developpeur', 'azerty');
@@ -50,11 +51,11 @@ class ConnexionController extends AbstractController{
                     return $this->redirectToRoute( 'affichage', array( 'data' => $data ) ) ;
                     }
                 else {
-                    return $this->redirectToRoute( 'connexion', array( 'data' => $data ) ) ;
+                    return $this->redirectToRoute( 'cocomptable', array( 'data' => $data ) ) ;
                 }
     
         }       
-        return $this->render( 'connexion/index.html.twig', array( 'formulaire' => $form->createView() ) ) ;
+        return $this->render( 'cocomptable/index.html.twig', array( 'comptable' => $form->createView() ) ) ;
     
     }
    

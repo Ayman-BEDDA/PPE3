@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
+
+class SaisirController extends AbstractController
+{
+    
+    public function index()
+    {
+        return $this->render('saisir/index.html.twig', [
+            'controller_name' => 'SaisirController',
+        ]);
+    }
+}

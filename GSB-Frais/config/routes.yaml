@@ -11,9 +11,19 @@ visiteur:
 consulter:
     path: /affichage/consulter/{mois}/{annee}
     controller: App\Controller\ConsulterController::index
+saisir:
+    path: /affichage/saisir
+    controller: App\Controller\SaisirController::index
 connexion: 
     path: /connexion
     controller: App\Controller\ConnexionController::index
 affichage:
     path: /affichage
     controller: App\Controller\AffichageController::index
+
+comptable:
+    path: /comptable
+    controller: App\Controller\ComptableController::index
+cocomptable:
+    path: /cocomptable
+    controller: App\Controller\CocomptableController::index
