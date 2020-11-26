@@ -10,7 +10,9 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use \PDO;
-
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Asset\Package;
+use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
 
 class ConnexionController extends AbstractController{
 
@@ -18,8 +20,10 @@ class ConnexionController extends AbstractController{
    public function index(Request $request)
     {
         
-        $request = Request::createFromGlobals() ;
-                
+        
+        
+        
+        
         $form = $this->createFormBuilder(  )
             ->add( 'identifiant' , TextType::class )
             ->add( 'motDePasse' , PasswordType::class )
@@ -41,18 +45,23 @@ class ConnexionController extends AbstractController{
                 $rqt->execute() ;
                 $resultat1 = $rqt->fetch(\PDO::FETCH_ASSOC) ;
                 
+                
                 $sql = $pdo->prepare("select * from Visiteur where mdp = :motDePasse") ;
                 $sql->bindParam(':motDePasse', $data['motDePasse']);
                 $sql->execute() ;
                 $resultat2 = $sql->fetch(\PDO::FETCH_ASSOC) ;
                 
                 if ( $resultat1['login'] == $data['identifiant'] && $resultat2['mdp'] == $data['motDePasse'] ) {
+                    $session=$request->getSession();
+                    $session->set('login',$data['identifiant']);
+                    $session->get('login');
+                    
                     return $this->redirectToRoute( 'affichage', array( 'data' => $data ) ) ;
                     }
                 else {
                     return $this->redirectToRoute( 'connexion', array( 'data' => $data ) ) ;
                 }
-    
+                
         }       
         return $this->render( 'connexion/index.html.twig', array( 'formulaire' => $form->createView() ) ) ;
     

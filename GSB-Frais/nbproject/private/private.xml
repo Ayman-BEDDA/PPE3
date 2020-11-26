@@ -5,7 +5,9 @@
         <group>
             <file>file:/var/www/html/GSB-Frais/src/Controller/VisiteurController.php</file>
             <file>file:/var/www/html/GSB-Frais/src/Controller/ConnexionController.php</file>
+            <file>file:/var/www/html/GSB-Frais/src/Controller/FicheController.php</file>
             <file>file:/var/www/html/GSB-Frais/src/Controller/SaisirController.php</file>
+            <file>file:/var/www/html/GSB-Frais/src/Entity/Comptable.php</file>
             <file>file:/var/www/html/GSB-Frais/templates/accueil/index.html.twig</file>
             <file>file:/var/www/html/GSB-Frais/templates/connexion/index.html.twig</file>
             <file>file:/var/www/html/GSB-Frais/templates/affichage/index.html.twig</file>
@@ -17,6 +19,8 @@
             <file>file:/var/www/html/GSB-Frais/templates/cocomptable/index.html.twig</file>
             <file>file:/var/www/html/GSB-Frais/templates/visiteur/index.html.twig</file>
             <file>file:/var/www/html/GSB-Frais/config/routes.yaml</file>
+            <file>file:/var/www/html/GSB-Frais/public/css/bootstrap/sign-in/signin.css</file>
+            <file>file:/var/www/html/GSB-Frais/templates/fiche/index.html.twig</file>
             <file>file:/var/www/html/GSB-Frais/src/Controller/AccueilController.php</file>
             <file>file:/var/www/html/GSB-Frais/src/Controller/AffichageController.php</file>
             <file>file:/var/www/html/GSB-Frais/templates/base.html.twig</file>

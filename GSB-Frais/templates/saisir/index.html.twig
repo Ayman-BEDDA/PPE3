@@ -3,5 +3,13 @@
 {% block title %}Hello SaisirController!{% endblock %}
 
 {% block body %}
-saisir
+    
+<h1> Saisie de la fiche de frais de {{ app.session.get('login') }}</h1>
+<br>
+
+    
+<h1> Frais au forfait</h1>
+
+{{ form(saisir) }}
+
 {% endblock %}

@@ -9,13 +9,19 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use \PDO;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Asset\Package;
+use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
 
 class ConsulterController extends AbstractController
 {
     
-    public function index()
+    public function index(Request $request)
     {
-        $request = Request::createFromGlobals() ;
+        
+        
+        
+        
                 
         $form = $this->createFormBuilder(  )
             ->add( 'mois' , ChoiceType::class,[
@@ -55,21 +61,43 @@ class ConsulterController extends AbstractController
             $data = $form->getData() ;
                
                 array( 'data' => $data ) ;
+                $pdo = new \PDO('mysql:host=localhost; dbname=GSB_FRAIS', 'developpeur', 'azerty');
+                
+                $rqt = $pdo->prepare("select * from Visiteur where login = :identifiant") ;
+                $rqt->bindParam(':identifiant', $data['identifiant']);
+                $rqt->execute() ;
+                $resultat2 = $rqt->fetch(\PDO::FETCH_ASSOC) ;
+                
                 
                 $format="%s%s";
                 $date= sprintf($format,$data['mois'],$data['annee']);
                 $pdo = new \PDO('mysql:host=localhost; dbname=GSB_FRAIS', 'developpeur', 'azerty');
                 $rqt = $pdo->prepare("select * from FicheFrais INNER JOIN Visiteur ON FicheFrais.idVisiteur=Visiteur.id where mois = $date") ;
                 
+                $session=$request->getSession();
+                $session->set('mois',$data['mois']);
+                $session->get('mois');
+                
+                $session->set('annee',$data['annee']);
+                $session->get('annee');
+                
                 $rqt->execute() ;
                 $resultat1 = $rqt->fetch(\PDO::FETCH_ASSOC) ;
-            
-                if ( $resultat1['mois'] == $date  ){
-                    return $this->redirectToRoute( 'affichage', array( 'data' => $data ) ) ;
+                
+                if ( $resultat1['mois'] == $date ){
+                    $session=$request->getSession();
+                    $session->set('mois',$data['mois']);
+                    $session->get('mois');
+                
+                    $session->set('annee',$data['annee']);
+                    $session->get('annee');
+                    
+                    return $this->redirectToRoute( 'fiche', array( 'data' => $data ) ) ;
                 }
                 else {
                     return $this->redirectToRoute( 'connexion', array( 'data' => $data ) ) ;
                 }
+                
         }
         return $this->render( 'consulter/index.html.twig', array( 'choix' => $form->createView() ) ) ;
         

@@ -2,9 +2,14 @@
 
 {% block title %}Hello AffichageController!{% endblock %}
 
+{% block stylesheets %}<link href="{{ asset('css/bootstrap/starter-template/starter-template.css') }}" type="text/css" rel="stylesheet">{% endblock stylesheets %}
+
 {% block body %}
+{{ app.session.get('login') }}
 <h1>Menu</h1>
-<a href="{{path('consulter',{'mois':5,'annee':2000})}}">consulter</a>
+
+
+<a href="{{path('consulter',{'login':1,'mois':5,'annee':2000})}}">consulter</a>
 <br>
 <a href="{{path('saisir')}}">Saisir</a>
 {% endblock %}

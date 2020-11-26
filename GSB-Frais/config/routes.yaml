@@ -9,8 +9,11 @@ visiteur:
     path: /visiteur
     controller: App\Controller\VisiteurController::index    
 consulter:
-    path: /affichage/consulter/{mois}/{annee}
+    path: /affichage/consulter/{login}/{mois}/{annee}
     controller: App\Controller\ConsulterController::index
+fiche:
+    path: /fiche
+    controller: App\Controller\FicheController::index
 saisir:
     path: /affichage/saisir
     controller: App\Controller\SaisirController::index
