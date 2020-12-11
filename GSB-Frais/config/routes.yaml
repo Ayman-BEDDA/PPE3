@@ -24,6 +24,27 @@ affichage:
     path: /affichage
     controller: App\Controller\AffichageController::index
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 comptable:
     path: /comptable
     controller: App\Controller\ComptableController::index

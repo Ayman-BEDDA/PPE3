@@ -13,40 +13,36 @@ use \PDO;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Asset\Package;
 use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
+use Doctrine\ORM\EntityManagerInterface;
+
+
+use App\Entity\Visiteur;
+use Symfony\Component\HttpFoundation\Response;
 
 class FicheController extends AbstractController
 {
     
-    public function index(Request $request)
+    /**
+     * 
+     * @param int $id
+     * @return Response
+     * @throws type
+     */
+    
+    public function index(int $id): Response
     {
-        $form = $this->createFormBuilder(  )
-            ->add( 'identifiant' , TextType::class )
-            ->add( 'motDePasse' , PasswordType::class )
-            ->add( 'valider' , SubmitType::class )
-            ->add( 'annuler' , ResetType::class )
-            ->getForm() ;
+        $visiteur=$this->getDoctrine()
+            ->getRepository(Visiteur::class)
+            ->find($id);   
         
-        $form->handleRequest( $request ) ;
-        
-        if ( $form->isSubmitted() && $form->isValid() ) {
-            
-                $data = $form->getData() ;
-           
-                array( 'data' => $data ) ;
-                
-                $pdo = new \PDO('mysql:host=localhost; dbname=GSB_FRAIS', 'developpeur', 'azerty');
-                
-                $rqt = $pdo->prepare("SELECT * FROM FicheFrais") ;
-                
-               
-                $rqt->execute() ;
-                $resultat1 = $rqt->fetch(\PDO::FETCH_ASSOC) ;
-                
-                $session=$request->getSession();
-                $session->set('test',$resultat1);
-                $session->get('test');
-                
+        if (!$visiteur) {
+            throw $this->createNotFoundException(
+                'No product found for id '.$id
+            );
         }
-        return $this->render( 'fiche/index.html.twig', array( 'test' => $form->createView() ) ) ;
+        
+        
+    
+        return new Response('Check out this great product: '.$visiteur->getName());
     }
 }
