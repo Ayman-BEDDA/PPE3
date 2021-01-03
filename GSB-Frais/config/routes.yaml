@@ -23,12 +23,17 @@ connexion:
 affichage:
     path: /affichage
     controller: App\Controller\AffichageController::index
+erreur:
+    path: /erreur
+    controller: App\Controller\ErreurController::index
 
+rfhf:
+    path: /rfhf
+    controller: App\Controller\rfhfController::index
 
-
-
-
-
+rf:
+    path: /rf
+    controller: App\Controller\rfController::index
 
 
 

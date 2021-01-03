@@ -21,41 +21,41 @@ class SaisirController extends AbstractController
     public function index(Request $request)
     {
         
-        $form = $this->createFormBuilder(  )
-                
-            ->add( 'mois' , IntegerType::class )    
-            ->add( 'annee' , IntegerType::class )    
-            
-            ->add( 'repas' , TextType::class )
-            ->add( 'nuitees' , TextType::class )
-            ->add( 'etapes' , TextType::class )
-            ->add( 'km' , TextType::class )
-                
-            
-            
-            ->add( 'envoyer' , SubmitType::class )
-            ->add( 'effacer' , ResetType::class )
-            ->getForm() ;
-            
-        $form->handleRequest( $request ) ;
         
-        if ( $form->isSubmitted() && $form->isValid() ) {
-            $data = $form->getData() ;
-           
-                array( 'data' => $data ) ;
-                
-                $pdo = new \PDO('mysql:host=localhost; dbname=GSB_FRAIS', 'developpeur', 'azerty');
-                
-                $rqt = $pdo->prepare("UPDATE INTO `FraisForfait` (`id`, `libelle`, `montant`) VALUES(:repas,:nuitees,:etapes,:km)") ;
-                $rqt->bindParam(':repas', $data['repas']);
-                $rqt->bindParam(':nuitees', $data['nuitees']);
-                $rqt->bindParam(':etapes', $data['etapes']);
-                $rqt->bindParam(':km', $data['km']);
-                $rqt->execute() ;
-                $resultat1 = $rqt->fetch(\PDO::FETCH_ASSOC) ;
-                
+        
+        $today = getdate() ;
+        $todayMonth = $today['mon'] ;
+        $todayYear = $today['year'] ;
+        $todaymy = $todayMonth."-".$todayYear ;
+        $auj = date('Y-m-d') ;
+        if( strlen($todayMonth) != 2 ){
+        $todayMonth = 0 . $todayMonth ;
+    }
+    $aaa = sprintf("%02d%04d",$todayMonth,$todayYear) ;
+
+    $request = Request::createFromGlobals() ;
+
+    $form = $this->createFormBuilder( )
+    ->add( 'SeDéconnecter' , SubmitType::class )
+    ->getForm() ;
+
+    $form->handleRequest( $request ) ;
+
+    if ( $form->isSubmitted() && $form->isValid() ) {
+        return $this->redirectToRoute( 'saisir' , array( 'formulaire' => $form->createView() ) ) ;
+    }
+
+return $this->render('saisir/index.html.twig', [
+'controller_name' => 'VisiteurController',
+'formulaire' => $form->createView() ,
+
+    
+    
+'todaymy' => $todaymy ,
+]);
+
                 
         }
-        return $this->render( 'saisir/index.html.twig', array( 'saisir' => $form->createView() ) ) ;
+        
     }
-}
+

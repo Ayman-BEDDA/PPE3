@@ -51,15 +51,26 @@ class ConnexionController extends AbstractController{
                 $sql->execute() ;
                 $resultat2 = $sql->fetch(\PDO::FETCH_ASSOC) ;
                 
+                
+                
                 if ( $resultat1['login'] == $data['identifiant'] && $resultat2['mdp'] == $data['motDePasse'] ) {
                     $session=$request->getSession();
                     $session->set('login',$data['identifiant']);
                     $session->get('login');
                     
+                    $session->set('id',$resultat1['id']);
+                    $session->get('id');
+                    
+                    $session->set('nom',$resultat1['nom']);
+                    $session->get('nom');
+                    
+                    $session->set('prenom',$resultat1['prenom']);
+                    $session->get('prenom');
+                    
                     return $this->redirectToRoute( 'affichage', array( 'data' => $data ) ) ;
                     }
                 else {
-                    return $this->redirectToRoute( 'connexion', array( 'data' => $data ) ) ;
+                    return $this->redirectToRoute( 'erreur_controlleur', array( 'data' => $data ) ) ;
                 }
                 
         }       

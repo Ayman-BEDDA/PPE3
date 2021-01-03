@@ -1,15 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SaisirController!{% endblock %}
+{% block title %}Hello VisiteurController!{% endblock %}
 
 {% block body %}
-    
-<h1> Saisie de la fiche de frais de {{ app.session.get('login') }}</h1>
-<br>
+<style>
+.example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+.example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
 
-    
-<h1> Frais au forfait</h1>
+<div class="example-wrapper">
+<h1>Hello !!! ✅</h1>
 
-{{ form(saisir) }}
 
-{% endblock %}
+<p> Reinseigner mes frais pour le mois : {{ todaymy }}</p>
+</br>
+
+<a href="{{ path( 'rf' ) }}">Renseigner frais forfait</a>
+<br/>
+<a href="{{ path( 'rfhf' ) }}">Renseigner frais hors forfait</a>
+</br>
+<br/>
+<a id="btn_delete" href="{{ path( 'affichage' ) }}">Retour au menu</a>
+</br>
+
+</div>
+{% endblock %} 
