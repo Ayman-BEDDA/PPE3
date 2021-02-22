@@ -28,7 +28,7 @@ class ConnexionController extends AbstractController{
             ->add( 'identifiant' , TextType::class )
             ->add( 'motDePasse' , PasswordType::class )
             ->add( 'valider' , SubmitType::class )
-            ->add( 'annuler' , ResetType::class )
+            ->add( 'effacer' , ResetType::class )
             ->getForm() ;
             
         $form->handleRequest( $request ) ;

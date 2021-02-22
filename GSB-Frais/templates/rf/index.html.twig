@@ -1,9 +1,29 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello RfController!{% endblock %}
+{% block title %}Hello VisiteurController!{% endblock %}
 
 {% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
 
-{{ form(formu) }}
+<div class="example-wrapper">
+    <h1>Hello !!! ✅</h1>
+
+    <p> Connecté : {{ app.session.get('nom') }} {{ app.session.get('prenom') }} {{ app.session.get('id') }} </p>
     
+    
+    <p> Element forfaitisé </p>
+    {{ form(formulaire) }}
+    
+    <p> Total : {{ total }} euro(s) </br>
+        Elements forfaitisés saisis pour le mois courrant : </br> - {{ totalF[1] }} 
+                                      </br> - {{ totalF[2] }}
+                                      </br> - {{ totalF[3] }}
+                                      </br> - {{ totalF[4] }}</p>
+    
+    <a id="btn_delete" href="{{ path( 'affichage' ) }}">Retour au menu</a>
+
+</div>
 {% endblock %}

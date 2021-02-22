@@ -5,10 +5,13 @@
 {% block stylesheets %}<link href="{{ asset('css/bootstrap/starter-template/starter-template.css') }}" type="text/css" rel="stylesheet">{% endblock stylesheets %}
 
 {% block body %}
-Vous êtes connectés sous le login {{ app.session.get('login') }}
+    
+    <style></style>    
+    
+Espace visiteur de {{ app.session.get('nom') }}  {{ app.session.get('prenom') }}
 <br>
 
-<h1>Menu</h1>
+<h1>Bienvenue sur l'intranet GSB</h1>
 
 
 <a href="{{path('consulter',{'login':1,'mois':5,'annee':2000})}}">consulter</a>

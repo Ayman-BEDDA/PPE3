@@ -1,7 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello RfhfController!{% endblock %}
+{% block title %}Hello VisiteurController!{% endblock %}
 
 {% block body %}
-{{ form(formulaires) }}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    table { font-family: arial, sans-serif; border-collapse: collapse; width: 100%;}
+    td, th { border: 1px solid #dddddd; text-align: left; padding: 8px;}
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello !!! ✅</h1>
+
+    <p> Connecté : {{ app.session.get('nom') }} {{ app.session.get('prenom') }} {{ app.session.get('id') }}  </p>
+    <p> Reinseigner des frais hors forfait pour le mois courrant : {{ todaymy }} </p>
+
+
+    <table>
+  <tr>
+    <th>Date</th>
+    <th>Libellé</th>
+    <th>Montant</th>
+    <th>  </th>
+  </tr>
+  {#{% for tab in nbLigne %}#}
+    
+      {% for i in 0..nbLigne %}
+          {% if tab is not empty %}
+          <tr>
+         <td>{{ tab[i]['date'] }}</td>
+         <td>{{ tab[i]['libelle'] }}</td>
+         <td>{{ tab[i]['montant'] }}</td>
+         {% set idff = tab[i]['id'] %}
+         {#<td><a href="{{ path( 'visiteur/renseigner/fhf/confirmation' ) }}">Supprimer</a></td>#}
+         <td><a id="btn_delete" href="{{ path( 'rfhf', { 'idff': idff } ) }}" 
+                onclick="return confirm('Etes-vous sûr de vouloir supprimer : ')">Supprimer</a></td>
+          </tr>
+          {% endif %}
+      {% endfor %}    
+     
+  {#{% endfor %}#}
+    </table>
+    
+    <p> Element hors forfait : </p>
+    {{ form(formulaire) }}
+    <br/>
+    <a id="btn_delete" href="{{ path( 'affichage' ) }}">Retour au menu</a>
+
+</div>
 {% endblock %}
