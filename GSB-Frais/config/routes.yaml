@@ -29,11 +29,11 @@ erreur:
 
 rfhf:
     path: /rfhf
-    controller: App\Controller\rfhfController::index
+    controller: App\Controller\RfhfController::index
 
 rf:
     path: /rf
-    controller: App\Controller\rfController::index
+    controller: App\Controller\RfController::index
 
 
 
@@ -56,3 +56,6 @@ comptable:
 cocomptable:
     path: /cocomptable
     controller: App\Controller\CocomptableController::index
+valider:
+    path: /valider
+    controller: App\Controller\ValiderController::index

@@ -4,6 +4,17 @@
 
 {% block body %}
     
-mathys
+Consultation de la fiche de frais de : {{ app.session.get('login') }}
+<br>
+Date : {{ app.session.get('mois') }}/ {{ app.session.get('annee') }}
+<br>
+Etat : {{ app.session.get('libelleEtat') }}
+<br>
+Montant : {{ app.session.get('montant') }}
+<br>
+Quantite : {{ app.session.get('quantite') }}
+<br>
+Libelle Frais Forfait : {{ app.session.get('libelle') }}
+
 
 {% endblock %}

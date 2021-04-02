@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AffichecController!{% endblock %}
+
+{% block body %}
+Espace comptable de {{ app.session.get('nomc') }}  {{ app.session.get('prenomc') }}
+<br>
+
+<h1>Bienvenue sur l'intranet GSB</h1>
+
+
+<a href="{{path('valider')}}">Valider</a>
+<br>
+<a href="{{path('cocomptable')}}">Suivre</a>
+<br>
+<br>
+<a href="{{path('cocomptable')}}">Se déconnecter</a>
+
+{% endblock %}
